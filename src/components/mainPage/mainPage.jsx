@@ -3,15 +3,22 @@ import Button from "../../utils/button";
 import { Box, Modal } from "@mui/material";
 import "../mainPage/main.css";
 import Form from "../form/form";
-import CurrentUsers from "../currentUsers/currentUsers";
+import CurrentUser from "../currentUsers/currentUsers";
+import { useSelector } from "react-redux";
 
 const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { allUsers } = useSelector((state) => state.user);
+  const [onUpdate, setUpdate] = useState(false);
+  console.log(allUsers);
 
   const handleOpen = () => {
     setIsOpen(true);
   };
 
+  const handleUpdate = () => {
+    setUpdate((prev) => !prev);
+  };
   const handleClose = () => {
     setIsOpen(false);
   };
@@ -25,11 +32,18 @@ const MainPage = () => {
       />
       <Modal open={isOpen} onClose={handleClose}>
         <Box className="box">
-          <Form handleClose={handleClose} />
+          <Form handleClose={handleClose} handleUpdate={handleUpdate} />
         </Box>
       </Modal>
 
-      <CurrentUsers />
+      <CurrentUser />
+
+      <div>
+        Bellow are our users <br />
+        {allUsers.map((user, id) => {
+          return <div key={id}>{user.name}</div>;
+        })}
+      </div>
     </div>
   );
 };

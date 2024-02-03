@@ -6,7 +6,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../redux/slices/userSlices";
 
-const Form = ({ handleClose }) => {
+const Form = ({ handleClose, handleUpdate }) => {
   const dispatch = useDispatch();
   const validationSchema = yup.object({
     name: yup.string().required("Name is required"),
@@ -29,6 +29,7 @@ const Form = ({ handleClose }) => {
         handleClose();
         console.log(response.data.user);
         dispatch(addUser(response.data.user));
+        handleUpdate();
       } catch (error) {
         console.error(error);
       }
@@ -39,7 +40,7 @@ const Form = ({ handleClose }) => {
     <div>
       <form onSubmit={formik.handleSubmit} className="formField">
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
@@ -53,7 +54,7 @@ const Form = ({ handleClose }) => {
           ) : null}
         </div>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="text"
             id="email"
