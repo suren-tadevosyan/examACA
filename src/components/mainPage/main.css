@@ -16,6 +16,13 @@ body {
   height: 100vh;
 }
 
+.users {
+  background-color: aqua;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
 .modal-toggler {
   cursor: pointer;
   border-radius: 30px;

@@ -36,9 +36,9 @@ const MainPage = () => {
         </Box>
       </Modal>
 
-      <CurrentUser />
+      <CurrentUser onUpdate={onUpdate} />
 
-      <div>
+      <div className="users">
         Bellow are our users <br />
         {allUsers.map((user, id) => {
           return <div key={id}>{user.name}</div>;
