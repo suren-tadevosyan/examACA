@@ -1,19 +1,18 @@
+import axios from "axios";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const CurrentUsers = () => {
-  const { users } = useSelector((state) => state.user);
-  console.log(users);
-  return (
-    <div>
-      {users.map((user, id) => {
-        return (
-          <div key={id}>
-            {user.name}:::{user.email}
-          </div>
-        );
-      })}
-    </div>
-  );
+  const { currentUser } = useSelector((state) => state.user);
+  console.log({ currentUser });
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await axios.get("http://localhost:5001/users");
+      // console.log(data.data.users);
+    };
+    fetchData();
+  }, []);
+  return <div>{currentUser && <p>{currentUser}</p>}</div>;
 };
 
 export default CurrentUsers;
